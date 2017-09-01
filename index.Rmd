@@ -3,6 +3,15 @@ title: "dplyr"
 output: html_document
 ---
 
+Justin Minsk
+
+9/1/2017
+ 
+<img src="justin_2.jpg" alt="Justin Minsk" height="500" width = "250">
+ 
+## Preface
+The purpose of this website is to learn basic website building using Rmarkdown and to create notes for dpylr as a Mercyhurst grad student.
+
 ## Filter Columns and Rows
 
 When using dplyr, you can filter using select and filter commands. Below is an example of how this works. First you need to install and load Lahman and dplyr packages.
@@ -17,6 +26,6 @@ Now we will run an example of filtering.
 Batting %>%
   select(playerID, yearID, teamID, HR) %>%
   filter(teamID == "NYA" & yearID == 1927)
-#take from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927
+#take from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927.
 ```
 
