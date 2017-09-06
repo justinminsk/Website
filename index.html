@@ -132,7 +132,7 @@ $(document).ready(function () {
 <p>When using dplyr, you can filter using select and filter commands. Below is an example of how this works. First you need to install and load Lahman and dplyr packages.</p>
 <pre class="r"><code>library(Lahman)
 library(dplyr)</code></pre>
-<p>Now we will run an example of filtering.</p>
+<p>Now we will run an example of filtering by taking from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927.</p>
 <pre class="r"><code>Batting %&gt;%
   select(playerID, yearID, teamID, HR) %&gt;%
   filter(teamID == &quot;NYA&quot; &amp; yearID == 1927)</code></pre>
@@ -162,7 +162,201 @@ library(dplyr)</code></pre>
 ## 23 shockur01   1927    NYA  0
 ## 24 thomamy01   1927    NYA  0
 ## 25  weraju01   1927    NYA  1</code></pre>
-<pre class="r"><code>#take from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927.</code></pre>
+<p>Finding players in the New York Yankees who hit more than 39 Home Runs.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, yearID, teamID, HR) %&gt;%
+  filter(HR &gt; 39 &amp; teamID == &quot;NYA&quot;)</code></pre>
+<pre><code>##     playerID yearID teamID HR
+## 1   ruthba01   1920    NYA 54
+## 2   ruthba01   1921    NYA 59
+## 3   ruthba01   1923    NYA 41
+## 4   ruthba01   1924    NYA 46
+## 5   ruthba01   1926    NYA 47
+## 6  gehrilo01   1927    NYA 47
+## 7   ruthba01   1927    NYA 60
+## 8   ruthba01   1928    NYA 54
+## 9   ruthba01   1929    NYA 46
+## 10 gehrilo01   1930    NYA 41
+## 11  ruthba01   1930    NYA 49
+## 12 gehrilo01   1931    NYA 46
+## 13  ruthba01   1931    NYA 46
+## 14  ruthba01   1932    NYA 41
+## 15 gehrilo01   1934    NYA 49
+## 16 gehrilo01   1936    NYA 49
+## 17 dimagjo01   1937    NYA 46
+## 18 mantlmi01   1956    NYA 52
+## 19 mantlmi01   1958    NYA 42
+## 20 mantlmi01   1960    NYA 40
+## 21 mantlmi01   1961    NYA 54
+## 22 marisro01   1961    NYA 61
+## 23 jacksre01   1980    NYA 41
+## 24 martiti02   1997    NYA 44
+## 25 giambja01   2002    NYA 41
+## 26 giambja01   2003    NYA 41
+## 27 rodrial01   2005    NYA 48
+## 28 rodrial01   2007    NYA 54
+## 29 grandcu01   2011    NYA 41
+## 30 grandcu01   2012    NYA 43</code></pre>
+<p>Finding players with more than 40 Home Runs and less than 400 Strike Outs.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, yearID, teamID, HR, SO) %&gt;%
+  filter(HR &gt; 40 &amp; SO &lt; 60)</code></pre>
+<pre><code>##     playerID yearID teamID HR SO
+## 1  hornsro01   1922    SLN 42 50
+## 2  willicy01   1923    PHI 41 57
+## 3    ottme01   1929    NY1 42 38
+## 4  gehrilo01   1931    NYA 46 56
+## 5   ruthba01   1931    NYA 46 51
+## 6  gehrilo01   1934    NYA 49 31
+## 7  gehrilo01   1936    NYA 49 46
+## 8  troskha01   1936    CLE 42 58
+## 9  dimagjo01   1937    NYA 46 37
+## 10  mizejo01   1940    SLN 43 49
+## 11  mizejo01   1947    NY1 51 42
+## 12 willite01   1949    BOS 43 48
+## 13 kinerra01   1951    PIT 42 57
+## 14 camparo01   1953    BRO 41 58
+## 15 rosenal01   1953    CLE 43 48
+## 16 kluszte01   1954    CIN 49 35
+## 17  mayswi01   1954    NY1 41 57
+## 18 kluszte01   1955    CIN 47 40
+## 19 aaronha01   1957    ML1 44 58
+## 20 sievero01   1957    WS1 42 55
+## 21 aaronha01   1969    ATL 44 47
+## 22 aaronha01   1971    ATL 47 58
+## 23 thomafr04   1993    CHA 41 54
+## 24 bondsba01   2002    SFN 46 47
+## 25 bondsba01   2003    SFN 45 58
+## 26 bondsba01   2004    SFN 45 41
+## 27 pujolal01   2004    SLN 46 52
+## 28 pujolal01   2006    SLN 49 50</code></pre>
+<p>Philis players who hit more than 30 Home Runs in the 1970’s.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, yearID, teamID, HR) %&gt;%
+  filter(HR &gt; 30 &amp; teamID == &quot;PHI&quot; &amp; yearID &gt;= 1970 &amp; yearID &lt; 1980)</code></pre>
+<pre><code>##    playerID yearID teamID HR
+## 1 johnsde01   1971    PHI 34
+## 2 schmimi01   1974    PHI 36
+## 3 luzingr01   1975    PHI 34
+## 4 schmimi01   1975    PHI 38
+## 5 schmimi01   1976    PHI 38
+## 6 luzingr01   1977    PHI 39
+## 7 schmimi01   1977    PHI 38
+## 8 luzingr01   1978    PHI 35
+## 9 schmimi01   1979    PHI 45</code></pre>
+<p>Players with more than 50 Home Runs arranged by highest to lowest Home Run total.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, yearID, teamID, HR) %&gt;%
+  filter(HR &gt; 50) %&gt;%
+  arrange(desc(HR))</code></pre>
+<pre><code>##     playerID yearID teamID HR
+## 1  bondsba01   2001    SFN 73
+## 2  mcgwima01   1998    SLN 70
+## 3   sosasa01   1998    CHN 66
+## 4  mcgwima01   1999    SLN 65
+## 5   sosasa01   2001    CHN 64
+## 6   sosasa01   1999    CHN 63
+## 7  marisro01   1961    NYA 61
+## 8   ruthba01   1927    NYA 60
+## 9   ruthba01   1921    NYA 59
+## 10  foxxji01   1932    PHA 58
+## 11 greenha01   1938    DET 58
+## 12 howarry01   2006    PHI 58
+## 13 gonzalu01   2001    ARI 57
+## 14 rodrial01   2002    TEX 57
+## 15 wilsoha01   1930    CHN 56
+## 16 griffke02   1997    SEA 56
+## 17 griffke02   1998    SEA 56
+## 18  ruthba01   1920    NYA 54
+## 19  ruthba01   1928    NYA 54
+## 20 kinerra01   1949    PIT 54
+## 21 mantlmi01   1961    NYA 54
+## 22 ortizda01   2006    BOS 54
+## 23 rodrial01   2007    NYA 54
+## 24 bautijo02   2010    TOR 54
+## 25 davisch02   2013    BAL 53
+## 26 mantlmi01   1956    NYA 52
+## 27  mayswi01   1965    SFN 52
+## 28 fostege01   1977    CIN 52
+## 29 mcgwima01   1996    OAK 52
+## 30 rodrial01   2001    TEX 52
+## 31 thomeji01   2002    CLE 52
+## 32 kinerra01   1947    PIT 51
+## 33  mizejo01   1947    NY1 51
+## 34  mayswi01   1955    NY1 51
+## 35 fieldce01   1990    DET 51
+## 36 jonesan01   2005    ATL 51</code></pre>
+<p>Find players with less than 10 Strike Outs who played more than 400 games at bat.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, yearID, teamID, SO, AB) %&gt;%
+  filter(SO &lt; 10, AB &gt; 400) %&gt;%
+  arrange(SO)</code></pre>
+<pre><code>##     playerID yearID teamID SO  AB
+## 1  doyleja01   1894    NY1  3 422
+## 2  seweljo01   1932    NYA  3 503
+## 3  seweljo01   1925    CLE  4 608
+## 4  seweljo01   1929    CLE  4 578
+## 5  seweljo01   1933    NYA  4 524
+## 6   wardjo01   1893    NY1  5 588
+## 7  holloch01   1922    CHN  5 592
+## 8  mcinnst01   1922    CLE  5 537
+## 9  wanerll01   1936    PIT  5 414
+## 10 wrighge01   1875    BS1  6 408
+## 11 broutda01   1889    BSN  6 485
+## 12 keelewi01   1894    BLN  6 590
+## 13  wardjo01   1894    NY1  6 540
+## 14 quinnjo02   1895    SLN  6 543
+## 15 mcinnst01   1924    BSN  6 581
+## 16 seweljo01   1926    CLE  6 578
+## 17  wardjo01   1889    NY1  7 479
+## 18 crossla01   1893    PHI  7 415
+## 19 quinnjo02   1893    SLN  7 547
+## 20 crossla01   1894    PHI  7 529
+## 21 vaughfa01   1896    CIN  7 433
+## 22 cochrmi01   1927    PHA  7 432
+## 23 seweljo01   1927    CLE  7 569
+## 24 traynpi01   1929    PIT  7 540
+## 25 muelldo01   1956    NY1  7 453
+## 26 connoro01   1885    NY1  8 455
+## 27 glassja01   1887    IN3  8 483
+## 28 glassja01   1890    NY1  8 512
+## 29 donovpa01   1893    PIT  8 499
+## 30 dungasa01   1893    CHN  8 465
+## 31 pinknge01   1893    LS3  8 446
+## 32 brodist01   1894    BLN  8 573
+## 33 quinnjo02   1894    SLN  8 405
+## 34 bierblo01   1895    PIT  8 466
+## 35 crossla01   1895    PHI  8 535
+## 36   hoydu01   1895    CIN  8 429
+## 37 roushed01   1921    CIN  8 418
+## 38 collied01   1923    CHA  8 505
+## 39 collied01   1925    CHA  8 425
+## 40 speaktr01   1927    WS1  8 523
+## 41 cochrmi01   1929    PHA  8 514
+## 42 seweljo01   1931    NYA  8 484
+## 43 wanerll01   1933    PIT  8 500
+## 44 verbaem01   1947    PHI  8 540
+## 45 ansonca01   1883    CHN  9 413
+## 46 broutda01   1887    DTN  9 500
+## 47   hoydu01   1893    WAS  9 564
+## 48 bierblo01   1894    PIT  9 525
+## 49 broutda01   1894    BLN  9 525
+## 50 milledo01   1894    SLN  9 481
+## 51 keelewi01   1896    BLN  9 544
+## 52 mckeaed01   1896    CL4  9 571
+## 53 speaktr01   1918    CLE  9 471
+## 54  dealch01   1921    CHN  9 422
+## 55 mcinnst01   1921    BOS  9 584
+## 56 severha01   1921    SLA  9 472
+## 57  highan01   1926    BSN  9 476
+## 58 summaho01   1926    CLE  9 581
+## 59 seweljo01   1928    CLE  9 588
+## 60  ricesa01   1929    WS1  9 616
+## 61 leachfr01   1931    NY1  9 515
+## 62 busched01   1945    PHA  9 416
+## 63 holmeto01   1945    BSN  9 636
+## 64 boudrlo01   1948    CLE  9 560
+## 65 mitchda01   1952    CLE  9 511</code></pre>
 </div>
 
 

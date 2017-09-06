@@ -21,11 +21,42 @@ library(Lahman)
 library(dplyr)
 
 ```
-Now we will run an example of filtering.
+Now we will run an example of filtering by taking from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927.
 ```{r}
 Batting %>%
   select(playerID, yearID, teamID, HR) %>%
   filter(teamID == "NYA" & yearID == 1927)
-#take from Batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927.
+```
+Finding players in the New York Yankees who hit more than 39 Home Runs.
+```{r}
+Batting %>%
+  select(playerID, yearID, teamID, HR) %>%
+  filter(HR > 39 & teamID == "NYA")
+```
+Finding players with more than 40 Home Runs and less than 400 Strike Outs.
+```{r}
+Batting %>%
+  select(playerID, yearID, teamID, HR, SO) %>%
+  filter(HR > 40 & SO < 60)
+```
+Philis players who hit more than 30 Home Runs in the 1970's.
+```{r}
+Batting %>%
+  select(playerID, yearID, teamID, HR) %>%
+  filter(HR > 30 & teamID == "PHI" & yearID >= 1970 & yearID < 1980)
+```
+Players with more than 50 Home Runs arranged by highest to lowest Home Run total.
+```{r}
+Batting %>%
+  select(playerID, yearID, teamID, HR) %>%
+  filter(HR > 50) %>%
+  arrange(desc(HR))
+```
+Find players with less than 10 Strike Outs who played more than 400 games at bat.
+```{r}
+Batting %>%
+  select(playerID, yearID, teamID, SO, AB) %>%
+  filter(SO < 10, AB > 400) %>%
+  arrange(SO)
 ```
 
