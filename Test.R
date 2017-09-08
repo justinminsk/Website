@@ -21,6 +21,7 @@ Batting %>%
 #take from batting the playerID, yearID, HR and then filter so the table only contains NY Yankees from the year 1927
 
 #---------------------------------------------
+#9/6/2017
 
 Batting %>%
   select(playerID, yearID, teamID, HR) %>%
@@ -57,4 +58,42 @@ Batting %>%
   arrange(SO)
 
 #-----------------------------------------------
+#9/8/17
 
+Batting %>%
+  select(playerID, HR) %>%
+  filter(playerID == "ruthba01") 
+
+#-------------------
+
+Batting %>%
+  filter(playerID == "ruthba01") %>%
+  group_by(playerID) %>%
+  summarise(career_HR = sum(HR)) 
+
+#----------------
+
+Batting %>%
+  group_by(playerID) %>%
+  summarise(career_HR = sum(HR)) %>%
+  filter(career_HR >=  600) %>%
+  arrange(desc(career_HR))
+
+#---------------
+
+Batting %>%
+  group_by(playerID) %>%
+  summarise(career_avg_HR = mean(HR)) %>%
+  filter(career_avg_HR >= 30) %>%
+  arrange(desc(career_avg_HR))
+
+#------------------
+
+Batting %>%
+  select(yearID, playerID, HR) %>%
+  filter(yearID >= 1970)%>%
+  group_by(playerID) %>%
+  summarise(highestHR = max(HR))%>%
+  filter(highestHR > 50)%>%
+  select(playerID)
+  

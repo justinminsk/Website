@@ -361,6 +361,109 @@ library(dplyr)</code></pre>
 ## 64 boudrlo01   1948    CLE  9 560
 ## 65 mitchda01   1952    CLE  9 511</code></pre>
 </div>
+<div id="group_by-and-summarise" class="section level2">
+<h2>group_by and summarise</h2>
+<p>Get Babe Ruths home runs.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(playerID, HR) %&gt;%
+  filter(playerID == &quot;ruthba01&quot;)</code></pre>
+<pre><code>##    playerID HR
+## 1  ruthba01  0
+## 2  ruthba01  4
+## 3  ruthba01  3
+## 4  ruthba01  2
+## 5  ruthba01 11
+## 6  ruthba01 29
+## 7  ruthba01 54
+## 8  ruthba01 59
+## 9  ruthba01 35
+## 10 ruthba01 41
+## 11 ruthba01 46
+## 12 ruthba01 25
+## 13 ruthba01 47
+## 14 ruthba01 60
+## 15 ruthba01 54
+## 16 ruthba01 46
+## 17 ruthba01 49
+## 18 ruthba01 46
+## 19 ruthba01 41
+## 20 ruthba01 34
+## 21 ruthba01 22
+## 22 ruthba01  6</code></pre>
+<p>Get Babe Ruths total home runs.</p>
+<pre class="r"><code>Batting %&gt;%
+  filter(playerID == &quot;ruthba01&quot;) %&gt;%
+  group_by(playerID) %&gt;%
+  summarise(career_HR = sum(HR))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   playerID career_HR
+##      &lt;chr&gt;     &lt;int&gt;
+## 1 ruthba01       714</code></pre>
+<p>Get players total home runs, 600 or more, in order from greatest to least.</p>
+<pre class="r"><code>Batting %&gt;%
+  group_by(playerID) %&gt;%
+  summarise(career_HR = sum(HR)) %&gt;%
+  filter(career_HR &gt;=  600) %&gt;%
+  arrange(desc(career_HR))</code></pre>
+<pre><code>## # A tibble: 8 x 2
+##    playerID career_HR
+##       &lt;chr&gt;     &lt;int&gt;
+## 1 bondsba01       762
+## 2 aaronha01       755
+## 3  ruthba01       714
+## 4 rodrial01       696
+## 5  mayswi01       660
+## 6 griffke02       630
+## 7 thomeji01       612
+## 8  sosasa01       609</code></pre>
+<p>Get players average home runs, with an average 30 or moew, and order it greatest to least.</p>
+<pre class="r"><code>Batting %&gt;%
+  group_by(playerID) %&gt;%
+  summarise(career_avg_HR = mean(HR)) %&gt;%
+  filter(career_avg_HR &gt;= 30) %&gt;%
+  arrange(desc(career_avg_HR))</code></pre>
+<pre><code>## # A tibble: 13 x 2
+##     playerID career_avg_HR
+##        &lt;chr&gt;         &lt;dbl&gt;
+##  1 pujolal01      36.93750
+##  2 bondsba01      34.63636
+##  3 mcgwima01      34.29412
+##  4 kinerra01      33.54545
+##  5 aaronha01      32.82609
+##  6 bryankr01      32.50000
+##  7  ruthba01      32.45455
+##  8  sosasa01      32.05263
+##  9 cabremi01      31.85714
+## 10 belleal01      31.75000
+## 11 rodrial01      31.63636
+## 12 schmimi01      30.44444
+## 13 abreujo02      30.33333</code></pre>
+<p>Get players, listed only once, that have made more than 50 home runs since 1970.</p>
+<pre class="r"><code>Batting %&gt;%
+  select(yearID, playerID, HR) %&gt;%
+  filter(yearID &gt;= 1970)%&gt;%
+  group_by(playerID) %&gt;%
+  summarise(highestHR = max(HR))%&gt;%
+  filter(highestHR &gt; 50)%&gt;%
+  select(playerID)</code></pre>
+<pre><code>## # A tibble: 14 x 1
+##     playerID
+##        &lt;chr&gt;
+##  1 bautijo02
+##  2 bondsba01
+##  3 davisch02
+##  4 fieldce01
+##  5 fostege01
+##  6 gonzalu01
+##  7 griffke02
+##  8 howarry01
+##  9 jonesan01
+## 10 mcgwima01
+## 11 ortizda01
+## 12 rodrial01
+## 13  sosasa01
+## 14 thomeji01</code></pre>
+</div>
 
 
 

@@ -63,3 +63,49 @@ Batting %>%
   arrange(SO)
 ```
 
+## group_by and summarise
+
+Get Babe Ruths home runs.
+```{r}
+Batting %>%
+  select(playerID, HR) %>%
+  filter(playerID == "ruthba01")
+```
+
+Get Babe Ruths total home runs.
+```{r}
+Batting %>%
+  filter(playerID == "ruthba01") %>%
+  group_by(playerID) %>%
+  summarise(career_HR = sum(HR))
+```
+
+Get players total home runs, 600 or more, in order from greatest to least.
+```{r}
+Batting %>%
+  group_by(playerID) %>%
+  summarise(career_HR = sum(HR)) %>%
+  filter(career_HR >=  600) %>%
+  arrange(desc(career_HR))
+```
+
+Get players average home runs, with an average 30 or moew, and order it greatest to least.
+```{r}
+Batting %>%
+  group_by(playerID) %>%
+  summarise(career_avg_HR = mean(HR)) %>%
+  filter(career_avg_HR >= 30) %>%
+  arrange(desc(career_avg_HR))
+```
+
+Get players, listed only once, that have made more than 50 home runs since 1970.
+```{r}
+Batting %>%
+  select(yearID, playerID, HR) %>%
+  filter(yearID >= 1970)%>%
+  group_by(playerID) %>%
+  summarise(highestHR = max(HR))%>%
+  filter(highestHR > 50)%>%
+  select(playerID)
+```
+
