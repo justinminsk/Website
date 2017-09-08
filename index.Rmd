@@ -45,6 +45,9 @@ Batting %>%
   select(playerID, yearID, teamID, HR) %>%
   filter(HR > 30 & teamID == "PHI" & yearID >= 1970 & yearID < 1980)
 ```
+
+## Arrange
+
 Players with more than 50 Home Runs arranged by highest to lowest Home Run total.
 ```{r}
 Batting %>%
