@@ -247,6 +247,7 @@ library(dplyr)</code></pre>
 </div>
 <div id="arrange" class="section level2">
 <h2>Arrange</h2>
+<p>You can use arrange() to make your tables orginized by values. This will always go from least to greatest, but you can use desc() to get highest to lowest. In the examples below you can see how this tool is useful.</p>
 <p>Players with more than 50 Home Runs arranged by highest to lowest Home Run total.</p>
 <pre class="r"><code>Batting %&gt;%
   select(playerID, yearID, teamID, HR) %&gt;%
@@ -363,6 +364,7 @@ library(dplyr)</code></pre>
 </div>
 <div id="group_by-and-summarise" class="section level2">
 <h2>group_by and summarise</h2>
+<p>You can use group_by() to push all instances of a string or int into one entry. Then you can use summarise() to sum(), mean(), or any other funciton to the varibles. The examples belowe will show how group_by and summarise can work together to create good querys.</p>
 <p>Get Babe Ruths home runs.</p>
 <pre class="r"><code>Batting %&gt;%
   select(playerID, HR) %&gt;%
@@ -416,7 +418,7 @@ library(dplyr)</code></pre>
 ## 6 griffke02       630
 ## 7 thomeji01       612
 ## 8  sosasa01       609</code></pre>
-<p>Get players average home runs, with an average 30 or moew, and order it greatest to least.</p>
+<p>Get players average home runs, with an average 30 or more, and order it greatest to least.</p>
 <pre class="r"><code>Batting %&gt;%
   group_by(playerID) %&gt;%
   summarise(career_avg_HR = mean(HR)) %&gt;%

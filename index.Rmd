@@ -10,6 +10,7 @@ Justin Minsk
 <img src="justin_2.jpg" alt="Justin Minsk" height="500" width = "250">
  
 ## Preface
+
 The purpose of this website is to learn basic website building using Rmarkdown and to create notes for dpylr as a Mercyhurst grad student.
 
 ## Filter Columns and Rows
@@ -48,6 +49,8 @@ Batting %>%
 
 ## Arrange
 
+You can use arrange() to make your tables orginized by values. This will always go from least to greatest, but you can use desc() to get highest to lowest. In the examples below you can see how this tool is useful.
+
 Players with more than 50 Home Runs arranged by highest to lowest Home Run total.
 ```{r}
 Batting %>%
@@ -64,6 +67,8 @@ Batting %>%
 ```
 
 ## group_by and summarise
+
+You can use group_by() to push all instances of a string or int into one entry. Then you can use summarise() to sum(), mean(), or any other funciton to the varibles. The examples belowe will show how group_by and summarise can work together to create good querys.
 
 Get Babe Ruths home runs.
 ```{r}
@@ -89,7 +94,7 @@ Batting %>%
   arrange(desc(career_HR))
 ```
 
-Get players average home runs, with an average 30 or moew, and order it greatest to least.
+Get players average home runs, with an average 30 or more, and order it greatest to least.
 ```{r}
 Batting %>%
   group_by(playerID) %>%
@@ -108,4 +113,4 @@ Batting %>%
   filter(highestHR > 50)%>%
   select(playerID)
 ```
-
+ 
